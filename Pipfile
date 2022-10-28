@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.8"
+
+[packages]
+jsonpath-ng = "==1.5.3"
+pytz = "==2021.1"
+python-dateutil = "*"
+proto-plus = "==1.19.6"
+apache-flink = "==1.16.0"
+
+[dev-packages]
+
+[scripts]
+start = "python main.py --isKafka True --input F:/Projects/Syngenta/flink/poc-flink-valenco-translator/input/101d9ef0-aad7-11ec-9564-41f828f7c680_20220301000339000_20220818111013000.json"
+start-kafka = "python main.py --isKafka True"
+test = "python -m unittest discover"
+coverage = "coverage run --source application/ -m  pytest tests/application --cov=application --junitxml ./coverage/reports/xunit.xml --cov-report xml:./coverage/reports/coverage.xml --html=./coverage/unit-test/index.html --self-contained-html --cov-report html:./coverage -p no:warnings -o log_cli=true"
+lint = "pylint --load-plugins pylint_quotes --fail-under 9 application"
+local = "docker-compose -f tests/local/databases.yml up --remove-orphans"
