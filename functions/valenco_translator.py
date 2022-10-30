@@ -3,6 +3,7 @@ import json
 from pyflink.common import Types
 from pyflink.datastream import ProcessFunction, OutputTag
 
+from logic.normalizer.asset_normalizer import AssetNormalizer
 from logic.normalizer.observation_normalizer import ObservationNormalizer
 
 observations_output_tag = OutputTag("translated-observations", Types.STRING())
@@ -44,8 +45,7 @@ class ValencoTranslator(ProcessFunction):
             if data_type == 'device':
                 normalizer = AssetNormalizer(account_id='account_1')
             else:
-                normalizer = ObservationNormalizer(account_id='account_1', data_type='tempOffBoard',
-                                                   device='xyz')
+                normalizer = ObservationNormalizer(account_id='account_1', data_type='tempOffBoard', device='xyz')
 
             return normalizer.normalize(timeseries)
         except Exception as ex:
